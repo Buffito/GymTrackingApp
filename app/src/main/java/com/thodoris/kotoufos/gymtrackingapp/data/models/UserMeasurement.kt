@@ -3,9 +3,9 @@ package com.thodoris.kotoufos.gymtrackingapp.data.models
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity
+@Entity(tableName = "UserMeasurements")
 data class UserMeasurement(
-    @PrimaryKey(autoGenerate = true) val id: Int = 0,
+    @PrimaryKey(autoGenerate = true) var id: Int = 0,
     val weight: Float,
     val height: Float,
     val neck: Float,
