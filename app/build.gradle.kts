@@ -77,6 +77,6 @@ dependencies {
     implementation(libs.hilt.android)
     implementation(libs.androidx.hilt.navigation.compose)
     ksp(libs.hilt.android.compiler)
-
+    ksp("androidx.room:room-compiler:2.6.1")
 
 }

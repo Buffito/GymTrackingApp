@@ -13,7 +13,10 @@ import javax.inject.Inject
 class UserMeasurementViewModel @Inject constructor(private val userMeasurementRepository: UserMeasurementRepository) :
     ViewModel() {
     val allMeasurements: Flow<List<UserMeasurement>> = userMeasurementRepository.allMeasurements
-    val latestMeasurement: UserMeasurement? = userMeasurementRepository.latestMeasurement
+
+    fun latestMeasurement(): Flow<UserMeasurement?> {
+        return userMeasurementRepository.getLatestMeasurement()
+    }
 
     fun insertMeasurement(userMeasurement: UserMeasurement) {
         viewModelScope.launch {
