@@ -13,7 +13,7 @@ interface UserMeasurementDao {
     suspend fun insertMeasurement(measurement: UserMeasurement)
 
     @Query("SELECT * FROM UserMeasurements ORDER BY timestamp DESC LIMIT 1")
-    fun getLatestMeasurement(): Flow<UserMeasurement?>
+    fun getLatestMeasurement(): Flow<UserMeasurement>
 
     @Query("SELECT * FROM UserMeasurements ORDER BY timestamp DESC")
     fun getAllMeasurements(): Flow<List<UserMeasurement>>

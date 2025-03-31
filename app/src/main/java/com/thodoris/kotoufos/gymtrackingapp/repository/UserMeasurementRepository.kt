@@ -8,7 +8,7 @@ import javax.inject.Inject
 class UserMeasurementRepository @Inject constructor(private val userMeasurementDao: UserMeasurementDao) {
     val allMeasurements: Flow<List<UserMeasurement>> = userMeasurementDao.getAllMeasurements()
 
-    fun getLatestMeasurement(): Flow<UserMeasurement?> {
+    fun getLatestMeasurement(): Flow<UserMeasurement> {
         return userMeasurementDao.getLatestMeasurement()
     }
 

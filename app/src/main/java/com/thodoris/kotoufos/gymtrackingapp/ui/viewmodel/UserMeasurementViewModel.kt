@@ -14,7 +14,7 @@ class UserMeasurementViewModel @Inject constructor(private val userMeasurementRe
     ViewModel() {
     val allMeasurements: Flow<List<UserMeasurement>> = userMeasurementRepository.allMeasurements
 
-    fun latestMeasurement(): Flow<UserMeasurement?> {
+    fun latestMeasurement(): Flow<UserMeasurement> {
         return userMeasurementRepository.getLatestMeasurement()
     }
 
