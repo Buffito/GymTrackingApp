@@ -3,9 +3,11 @@ package com.thodoris.kotoufos.gymtrackingapp.di
 import android.content.Context
 import androidx.room.Room
 import com.thodoris.kotoufos.gymtrackingapp.data.daos.UserMeasurementDao
+import com.thodoris.kotoufos.gymtrackingapp.data.daos.UserProfileDao
 import com.thodoris.kotoufos.gymtrackingapp.data.daos.WorkoutLogDao
 import com.thodoris.kotoufos.gymtrackingapp.data.database.AppDatabase
 import com.thodoris.kotoufos.gymtrackingapp.repository.UserMeasurementRepository
+import com.thodoris.kotoufos.gymtrackingapp.repository.UserProfileRepository
 import com.thodoris.kotoufos.gymtrackingapp.repository.WorkoutLogRepository
 import dagger.Module
 import dagger.Provides
@@ -29,10 +31,18 @@ object AppModule {
     }
 
     @Provides
+    fun provideUserProfileRepository(userProfileDao: UserProfileDao): UserProfileRepository {
+        return UserProfileRepository(userProfileDao)
+    }
+
+    @Provides
     fun provideWorkoutDao(db: AppDatabase): WorkoutLogDao = db.workoutLogDao()
 
     @Provides
     fun provideUserMeasurementDao(db: AppDatabase): UserMeasurementDao = db.userMeasurementDao()
+
+    @Provides
+    fun provideUserProfileDao(db: AppDatabase): UserProfileDao = db.userProfileDao()
 
     @Provides
     @Singleton

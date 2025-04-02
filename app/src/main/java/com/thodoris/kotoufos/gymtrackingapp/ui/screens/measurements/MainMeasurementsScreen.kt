@@ -1,6 +1,5 @@
 package com.thodoris.kotoufos.gymtrackingapp.ui.screens.measurements
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -21,8 +20,7 @@ import androidx.navigation.NavHostController
 fun MainMeasurementScreen(navController: NavHostController) {
     Box(
         modifier = Modifier
-            .fillMaxSize()
-            .background(Color.Black),
+            .fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
