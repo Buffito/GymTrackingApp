@@ -7,6 +7,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.thodoris.kotoufos.gymtrackingapp.ui.screens.MainScreen
 import com.thodoris.kotoufos.gymtrackingapp.ui.screens.SettingsScreen
+import com.thodoris.kotoufos.gymtrackingapp.ui.screens.measurements.InsertMeasurementScreen
 import com.thodoris.kotoufos.gymtrackingapp.ui.screens.measurements.MainMeasurementScreen
 import com.thodoris.kotoufos.gymtrackingapp.ui.viewmodel.UserMeasurementViewModel
 import com.thodoris.kotoufos.gymtrackingapp.ui.viewmodel.UserProfileViewModel
@@ -22,6 +23,7 @@ fun AppNavHost() {
     NavHost(navController = navController, startDestination = "main") {
         composable("main") { MainScreen(navController) }
         composable("settings") { SettingsScreen(userProfileViewModel, navController) }
-        composable("measurements") { MainMeasurementScreen(navController) }
+        composable("measurements") { MainMeasurementScreen(userMeasurementViewModel, userProfileViewModel, navController) }
+        composable("insertMeasurement") { InsertMeasurementScreen(userMeasurementViewModel, userProfileViewModel, navController) }
     }
 }

@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
@@ -40,6 +41,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.thodoris.kotoufos.gymtrackingapp.data.models.UserProfile
+import com.thodoris.kotoufos.gymtrackingapp.ui.components.InputField
 import com.thodoris.kotoufos.gymtrackingapp.ui.viewmodel.UserProfileViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -59,7 +61,6 @@ fun SettingsScreen(userProfileViewModel: UserProfileViewModel, navController: Na
         }
     }
 
-
     Scaffold(topBar = {
         TopAppBar(
             title = { Text("Settings") },
@@ -73,15 +74,7 @@ fun SettingsScreen(userProfileViewModel: UserProfileViewModel, navController: Na
                 .padding(16.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-
-            OutlinedTextField(
-                value = if (height == 0.0F) "" else height.toString(),
-                onValueChange = { height = it.toFloatOrNull() ?: 0.0F },
-                label = { Text("Height (cm)") },
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-                modifier = Modifier.fillMaxWidth()
-            )
-
+            InputField(label = "Height (cm)", value = height.toString(), onValueChange = { height = it.toFloatOrNull() ?: 0.0F })
             Box(modifier = Modifier
                 .fillMaxWidth()
                 .clickable { expanded = true }
@@ -93,7 +86,7 @@ fun SettingsScreen(userProfileViewModel: UserProfileViewModel, navController: Na
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     Text(text = gender.ifEmpty { "Select Gender" })
-                    Icon(Icons.Default.ArrowDropDown, "Dropdown")
+                    Icon(Icons.Default.ArrowDropDown, contentDescription = "Dropdown")
                 }
 
                 DropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
@@ -108,19 +101,17 @@ fun SettingsScreen(userProfileViewModel: UserProfileViewModel, navController: Na
 
             Button(
                 onClick = {
-                    if (gender.isNotBlank() && height > 0.0F){
-                        val profile = UserProfile(
-                            height = height,
-                            gender = gender
-                        )
-
+                    if (gender.isNotBlank() && height > 0.0F) {
+                        val profile = UserProfile(height = height, gender = gender)
                         userProfileViewModel.insertUpdateProfile(profile)
                         navController.popBackStack()
                     }
                 },
                 colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF673AB7)),
                 shape = RoundedCornerShape(12.dp),
-                modifier = Modifier.padding(8.dp)
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(56.dp)
             ) {
                 Text("Save", fontSize = 18.sp, color = Color.White)
             }
