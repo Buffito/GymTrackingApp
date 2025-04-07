@@ -11,7 +11,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.thodoris.kotoufos.gymtrackingapp.data.BodyFatCalculator.calculateBodyFat
@@ -20,6 +19,7 @@ import com.thodoris.kotoufos.gymtrackingapp.data.models.UserProfile
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
+import kotlin.math.round
 
 @Composable
 fun MeasurementItem(userMeasurement: UserMeasurement, userProfile: UserProfile) {
@@ -43,14 +43,15 @@ fun MeasurementItem(userMeasurement: UserMeasurement, userProfile: UserProfile) 
 
         Row {
             Text(
-                text = "Date of measurement: ", fontSize = 18.sp, fontWeight = FontWeight.Bold
+                text = "Date of measurement: ", fontSize = 18.sp
             )
             Text(
                 text = formattedDate, fontSize = 18.sp
             )
         }
 
-        Text("Body fat: $fatPercentage %", fontSize = 18.sp)
+
+        Text("Body fat: ${userMeasurement.bodyFat} %", fontSize = 18.sp)
         Spacer(modifier = Modifier.height(8.dp))
 
         HorizontalDivider(

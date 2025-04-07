@@ -10,5 +10,6 @@ data class UserMeasurement(
     val neck: Float,
     val hip: Float?, //only for women
     val waist: Float,
+    var bodyFat: Float?,
     val timestamp: Long = System.currentTimeMillis()
 )

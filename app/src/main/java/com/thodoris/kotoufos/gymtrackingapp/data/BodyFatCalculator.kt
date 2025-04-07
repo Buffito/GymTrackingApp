@@ -7,14 +7,16 @@ import kotlin.math.log10
 // calculate body fat percentage using the US Navy method
 object BodyFatCalculator {
     fun calculateBodyFat(measurement: UserMeasurement, userProfile: UserProfile): Float {
-        return if (userProfile.gender == "Male") {
-            (86.01 * log10((measurement.waist - measurement.neck).toDouble()) - 70.041 * log10(
+        val bodyFatPercentage = if (userProfile.gender == "Male") {
+            (495 / (1.0324 - 0.19077 * log10((measurement.waist - measurement.neck).toDouble()) + 0.15456 * log10(
                 userProfile.height.toDouble()
-            ) + 36.76).toFloat()
+            ))) - 450
         } else {
-            (163.205 * log10(
+            (495 / (1.29579 - 0.35004 * log10(
                 (measurement.waist + (measurement.hip ?: 0f) - measurement.neck).toDouble()
-            ) - 97.684 * log10(userProfile.height.toDouble()) - 78.387).toFloat()
+            ) + 0.22100 * log10(userProfile.height.toDouble()))) - 450
         }
+
+        return bodyFatPercentage.toFloat()
     }
 }

@@ -19,6 +19,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import com.thodoris.kotoufos.gymtrackingapp.data.BodyFatCalculator.calculateBodyFat
 import com.thodoris.kotoufos.gymtrackingapp.data.models.UserMeasurement
 import com.thodoris.kotoufos.gymtrackingapp.ui.components.InputField
 import com.thodoris.kotoufos.gymtrackingapp.ui.viewmodel.UserMeasurementViewModel
@@ -67,13 +68,16 @@ fun InsertMeasurementScreen(
                                         weight = it2,
                                         waist = it1,
                                         neck = it,
-                                        hip = hip.replace(",", ".").toFloatOrNull()
+                                        hip = hip.replace(",", ".").toFloatOrNull(),
+                                        bodyFat = null
                                     )
                                 }
                             }
                         }
 
                         if (newMeasurement != null) {
+                            val bodyFat = userProfile?.let { calculateBodyFat(newMeasurement, it) }
+                            newMeasurement.bodyFat = bodyFat
                             userMeasurementViewModel.insertMeasurement(newMeasurement)
                         }
 
